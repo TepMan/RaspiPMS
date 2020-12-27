@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "uy1rBwg7/7g5pinlJGMBm2xviPxbb5lPPy/eXCrtAa11IGvTnXnK9Ve9NLHl3qyGpR+CX77oMnVAC1Rb/hl3+w==",
+  "dgSpecHash": "RDdJsgVwoMvr+DgGSXlEeOgTpgNmPK4MuK/2KmnkL5uhWoXUzLpybLc9ZqvpjWAa29VvsKVk1bQLVB32lc6ZLQ==",
   "success": true,
   "projectFilePath": "C:\\Repositories\\RaspiPMS\\RaspiPMS.csproj",
   "expectedPackageFiles": [
@@ -9,17 +9,21 @@
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\microsoft.netcore.targets\\1.1.0\\microsoft.netcore.targets.1.1.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\microsoft.win32.registry\\5.0.0\\microsoft.win32.registry.5.0.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\microsoft.win32.systemevents\\5.0.0\\microsoft.win32.systemevents.5.0.0.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\runtime.any.system.runtime\\4.3.0\\runtime.any.system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\runtime.linux-arm.runtime.native.system.io.ports\\5.0.0-rtm.20519.4\\runtime.linux-arm.runtime.native.system.io.ports.5.0.0-rtm.20519.4.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\runtime.linux-arm64.runtime.native.system.io.ports\\5.0.0-rtm.20519.4\\runtime.linux-arm64.runtime.native.system.io.ports.5.0.0-rtm.20519.4.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\runtime.linux-x64.runtime.native.system.io.ports\\5.0.0-rtm.20519.4\\runtime.linux-x64.runtime.native.system.io.ports.5.0.0-rtm.20519.4.nupkg.sha512",
+    "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\runtime.native.system\\4.3.0\\runtime.native.system.4.3.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\runtime.native.system.io.ports\\5.0.0\\runtime.native.system.io.ports.5.0.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\runtime.osx-x64.runtime.native.system.io.ports\\5.0.0-rtm.20519.4\\runtime.osx-x64.runtime.native.system.io.ports.5.0.0-rtm.20519.4.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\runtime.unix.system.private.uri\\4.3.0\\runtime.unix.system.private.uri.4.3.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\system.codedom\\5.0.0\\system.codedom.5.0.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\system.device.gpio\\1.3.0\\system.device.gpio.1.3.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\system.drawing.common\\5.0.0\\system.drawing.common.5.0.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\system.io.ports\\5.0.0\\system.io.ports.5.0.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\system.management\\5.0.0\\system.management.5.0.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\system.memory\\4.5.4\\system.memory.4.5.4.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\system.private.uri\\4.3.0\\system.private.uri.4.3.0.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.runtime\\4.3.0\\system.runtime.4.3.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\system.runtime.interopservices.windowsruntime\\4.3.0\\system.runtime.interopservices.windowsruntime.4.3.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\system.runtime.windowsruntime\\4.6.0\\system.runtime.windowsruntime.4.6.0.nupkg.sha512",
@@ -27,7 +31,10 @@
     "C:\\Users\\andre\\.nuget\\packages\\system.security.principal.windows\\5.0.0\\system.security.principal.windows.5.0.0.nupkg.sha512",
     "C:\\Users\\andre\\.nuget\\packages\\system.threading.tasks.extensions\\4.5.4\\system.threading.tasks.extensions.4.5.4.nupkg.sha512",
     "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder\\system.valuetuple\\4.5.0\\system.valuetuple.4.5.0.nupkg.sha512",
-    "C:\\Users\\andre\\.nuget\\packages\\unitsnet\\4.77.0\\unitsnet.4.77.0.nupkg.sha512"
+    "C:\\Users\\andre\\.nuget\\packages\\unitsnet\\4.77.0\\unitsnet.4.77.0.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.netcore.app.runtime.linux-arm\\3.1.10\\microsoft.netcore.app.runtime.linux-arm.3.1.10.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.aspnetcore.app.runtime.linux-arm\\3.1.10\\microsoft.aspnetcore.app.runtime.linux-arm.3.1.10.nupkg.sha512",
+    "C:\\Users\\andre\\.nuget\\packages\\microsoft.netcore.app.host.linux-arm\\3.1.10\\microsoft.netcore.app.host.linux-arm.3.1.10.nupkg.sha512"
   ],
   "logs": []
 }
