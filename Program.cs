@@ -44,7 +44,16 @@ namespace RaspiPMS
                     Thread.Sleep(30000);
                     
                     Console.WriteLine("Versuche, Daten zu lesen...");
-                    Console.WriteLine(sp.ReadLine());
+
+                    // byte buffer = new byte();
+                    // byte[] response = new byte[FRAME_SIZE];
+
+                    // while(sp.ReadByte() != 0)
+                    // {
+                    //     Console.WriteLine("Daten gelesen: " + buffer.ToString());                        
+                    // }
+
+                    // Console.WriteLine(sp.ReadLine());
                     
                     Console.WriteLine("Versuche, den Sensor schlafen zu legen...");
                     sp.Write(SLEEP_CMD_BYTES, 0, SLEEP_CMD_BYTES.Length);
