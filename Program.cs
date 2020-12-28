@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Device.Gpio;
 using System.IO.Ports;
 using System.Text;
 using System.Threading;
@@ -12,8 +11,6 @@ namespace RaspiPMS
         {
             bool finished = false;
 
-            int pin = 18;
-
             int FRAME_SIZE = 32;
             byte START_BYTE_1 = 0x42;
             byte START_BYTE_2 = 0x4D;
@@ -22,9 +19,6 @@ namespace RaspiPMS
 
             try
             {
-                using GpioController controller = new();
-                controller.OpenPin(pin, PinMode.Output);
-
                 using SerialPort sp = new SerialPort("/dev/serial0");
                 sp.Encoding = Encoding.UTF8;
                 sp.BaudRate = 9600;
@@ -46,7 +40,6 @@ namespace RaspiPMS
                 while(!finished)
                 {
                     Console.WriteLine("Versuche, den Sensor zu wecken...");
-                    controller.Write(pin, PinValue.High);
                     sp.Write(WAKEUP_CMD_BYTES, 0, WAKEUP_CMD_BYTES.Length);
                     Thread.Sleep(30000);
                     
@@ -60,13 +53,15 @@ namespace RaspiPMS
                     }
 
                     Console.WriteLine("Gelesene Daten: " + ConvertToHexString(response));
+
+                    Console.WriteLine("PM 1.0: " + BitConverter.ToUInt16(response, 10));
+                    Console.WriteLine("PM 2.5: " + BitConverter.ToUInt16(response, 12));
+                    Console.WriteLine("PM 10 : " + BitConverter.ToUInt16(response, 14));
                     
                     Console.WriteLine("Versuche, den Sensor schlafen zu legen...");
                     sp.Write(SLEEP_CMD_BYTES, 0, SLEEP_CMD_BYTES.Length);
-                    controller.Write(pin, PinValue.Low);
                     Thread.Sleep(30000);
                 }
-
             }
             catch(Exception ex)
             {
@@ -80,7 +75,7 @@ namespace RaspiPMS
 
             foreach(byte b in bytes)
             {
-                builder.Append(b.ToString("X2"));
+                builder.Append(b.ToString("X2") + " ");
             }
 
             return builder.ToString();
