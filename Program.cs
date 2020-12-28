@@ -34,38 +34,49 @@ namespace RaspiPMS
                     finished = true;
                     // close port to kill pending operations
                     sp.Close();
-                    Console.WriteLine("Programm durch Anwender beendet.");
+                    Console.WriteLine("Program canceled by user.");
                 };
 
                 while(!finished)
                 {
-                    Console.WriteLine("Versuche, den Sensor zu wecken...");
+                    Console.WriteLine("Try to wake up sensor...");
                     sp.Write(WAKEUP_CMD_BYTES, 0, WAKEUP_CMD_BYTES.Length);
                     Thread.Sleep(30000);
                     
-                    Console.WriteLine("Versuche, Daten zu lesen...");
+                    Console.WriteLine("Try to read data...");
 
                     byte[] response = new byte[FRAME_SIZE];
 
-                    for(int idx = 0; idx < FRAME_SIZE; idx++)
-                    {
-                        response[idx] = (byte)sp.ReadByte();
-                    }
+                    sp.Read(response, 0, FRAME_SIZE);
 
-                    Console.WriteLine("Gelesene Daten: " + ConvertToHexString(response));
+                    Console.WriteLine("Rawdata: " + ConvertToHexString(response));
 
-                    Console.WriteLine("PM 1.0: " + BitConverter.ToUInt16(response, 10));
-                    Console.WriteLine("PM 2.5: " + BitConverter.ToUInt16(response, 12));
-                    Console.WriteLine("PM 10 : " + BitConverter.ToUInt16(response, 14));
+                    Console.WriteLine("CF1 values:");
+                    Console.WriteLine("PM 1.0: " + ConvertBytesToValue(response, 4));
+                    Console.WriteLine("PM 2.5: " + ConvertBytesToValue(response, 6));
+                    Console.WriteLine("PM 10 : " + ConvertBytesToValue(response, 8));
+
+                    Console.WriteLine("Atmospheric values:");
+                    Console.WriteLine("PM 1.0: " + ConvertBytesToValue(response, 10));
+                    Console.WriteLine("PM 2.5: " + ConvertBytesToValue(response, 12));
+                    Console.WriteLine("PM 10 : " + ConvertBytesToValue(response, 14));
+
+                    Console.WriteLine("Particles / 0.1L of air values:");
+                    Console.WriteLine("PM 0.3: " + ConvertBytesToValue(response, 16));
+                    Console.WriteLine("PM 0.5: " + ConvertBytesToValue(response, 18));
+                    Console.WriteLine("PM 1.0: " + ConvertBytesToValue(response, 20));
+                    Console.WriteLine("PM 2.5: " + ConvertBytesToValue(response, 22));
+                    Console.WriteLine("PM 5.0: " + ConvertBytesToValue(response, 24));
+                    Console.WriteLine("PM 10 : " + ConvertBytesToValue(response, 26));
                     
-                    Console.WriteLine("Versuche, den Sensor schlafen zu legen...");
+                    Console.WriteLine("Send seonsor to sleep mode...");
                     sp.Write(SLEEP_CMD_BYTES, 0, SLEEP_CMD_BYTES.Length);
                     Thread.Sleep(30000);
                 }
             }
             catch(Exception ex)
             {
-                Console.WriteLine("Es ist ein Fehler aufgetreten: " + ex.ToString());
+                Console.WriteLine("Error occured: " + ex.ToString());
             }
         }
 
@@ -79,6 +90,11 @@ namespace RaspiPMS
             }
 
             return builder.ToString();
+	    }
+
+        private static uint ConvertBytesToValue(byte[] bytes, int index) 
+        {
+		    return (Convert.ToUInt32(bytes[index]) << 8) + Convert.ToUInt32(bytes[index + 1]);
 	    }
     }
 }
