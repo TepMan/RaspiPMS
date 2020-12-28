@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Device.Gpio;
 using System.IO.Ports;
 using System.Text;
 using System.Threading;
@@ -11,6 +12,8 @@ namespace RaspiPMS
         {
             bool finished = false;
 
+            int pin = 18;
+
             int FRAME_SIZE = 32;
             byte START_BYTE_1 = 0x42;
             byte START_BYTE_2 = 0x4D;
@@ -19,6 +22,9 @@ namespace RaspiPMS
 
             try
             {
+                using GpioController controller = new();
+                controller.OpenPin(pin, PinMode.Output);
+
                 using SerialPort sp = new SerialPort("/dev/serial0");
                 sp.Encoding = Encoding.UTF8;
                 sp.BaudRate = 9600;
@@ -40,23 +46,24 @@ namespace RaspiPMS
                 while(!finished)
                 {
                     Console.WriteLine("Versuche, den Sensor zu wecken...");
+                    controller.Write(pin, PinValue.High);
                     sp.Write(WAKEUP_CMD_BYTES, 0, WAKEUP_CMD_BYTES.Length);
                     Thread.Sleep(30000);
                     
                     Console.WriteLine("Versuche, Daten zu lesen...");
 
-                    // byte buffer = new byte();
-                    // byte[] response = new byte[FRAME_SIZE];
+                    byte[] response = new byte[FRAME_SIZE];
 
-                    // while(sp.ReadByte() != 0)
-                    // {
-                    //     Console.WriteLine("Daten gelesen: " + buffer.ToString());                        
-                    // }
+                    for(int idx = 0; idx < FRAME_SIZE; idx++)
+                    {
+                        response[idx] = (byte)sp.ReadByte();
+                    }
 
-                    // Console.WriteLine(sp.ReadLine());
+                    Console.WriteLine("Gelesene Daten: " + ConvertToHexString(response));
                     
                     Console.WriteLine("Versuche, den Sensor schlafen zu legen...");
                     sp.Write(SLEEP_CMD_BYTES, 0, SLEEP_CMD_BYTES.Length);
+                    controller.Write(pin, PinValue.Low);
                     Thread.Sleep(30000);
                 }
 
@@ -66,5 +73,17 @@ namespace RaspiPMS
                 Console.WriteLine("Es ist ein Fehler aufgetreten: " + ex.ToString());
             }
         }
+
+        private static string ConvertToHexString(byte[] bytes) 
+        {
+            StringBuilder builder = new StringBuilder(bytes.Length * 2);
+
+            foreach(byte b in bytes)
+            {
+                builder.Append(b.ToString("X2"));
+            }
+
+            return builder.ToString();
+	    }
     }
 }
